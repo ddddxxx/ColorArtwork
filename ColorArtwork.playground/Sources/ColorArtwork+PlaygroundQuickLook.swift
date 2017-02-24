@@ -4,11 +4,13 @@ import ColorArtwork
 extension CAColorArtwork: CustomPlaygroundQuickLookable {
     
     public var customPlaygroundQuickLook: PlaygroundQuickLook {
+        let image = NSImage(cgImage: self.image, size: CGSize(width: 300, height: 300))
+        
         guard let background = backgroundColor.flatMap({ NSColor(cgColor: $0) }),
             let primary = primaryColor.flatMap({ NSColor(cgColor: $0) }),
             let secondary = secondaryColor.flatMap({ NSColor(cgColor: $0) }),
             let detail = detailColor.flatMap({ NSColor(cgColor: $0) }) else {
-            return .text("Waiting Analyzing")
+            return .image(image)
         }
         
         let view = NSBox(frame: CGRect(x: 0, y: 0, width: 600, height: 360))
@@ -35,7 +37,7 @@ extension CAColorArtwork: CustomPlaygroundQuickLookable {
         view.addSubview(l3)
         
         let imgView = FadeImageView(frame: CGRect(x: 270, y: 30, width: 300, height: 300))
-        imgView.image = NSImage(cgImage: image, size: CGSize(width: 300, height: 300))
+        imgView.image = image
         imgView.backgroundColor = background
         view.addSubview(imgView)
         
