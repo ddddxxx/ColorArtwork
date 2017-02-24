@@ -19,8 +19,6 @@
 		BB9B79981E5FCEB00024C8DE /* CARGBColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9B79961E5FCEB00024C8DE /* CARGBColor.swift */; };
 		BB9B79991E5FCEB00024C8DE /* CARGBColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9B79961E5FCEB00024C8DE /* CARGBColor.swift */; };
 		BB9B799A1E5FCEB00024C8DE /* CARGBColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9B79961E5FCEB00024C8DE /* CARGBColor.swift */; };
-		BBA71A811E60291800E347C1 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = BBA71A801E60291800E347C1 /* README.md */; };
-		BBA71A831E6033DC00E347C1 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = BBA71A821E6033DC00E347C1 /* LICENSE */; };
 		BBE06BB01E5FDD9500DE3A50 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE06BAF1E5FDD9500DE3A50 /* Tests.swift */; };
 		BBE06BB21E5FDD9500DE3A50 /* ColorArtwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB9B794F1E5FC5470024C8DE /* ColorArtwork.framework */; };
 		BBE06BB91E5FDF4C00DE3A50 /* Stadium Arcadium.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BBE06BB81E5FDF4C00DE3A50 /* Stadium Arcadium.jpg */; };
@@ -46,13 +44,14 @@
 		BB9B79811E5FC62C0024C8DE /* Info-macOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-macOS.plist"; sourceTree = "<group>"; };
 		BB9B79821E5FC62C0024C8DE /* Info-tvOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-tvOS.plist"; sourceTree = "<group>"; };
 		BB9B79831E5FC62C0024C8DE /* Info-watchOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-watchOS.plist"; sourceTree = "<group>"; };
-		BB9B79911E5FCE9E0024C8DE /* CAColorArtwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CAColorArtwork.swift; sourceTree = "<group>"; };
-		BB9B79961E5FCEB00024C8DE /* CARGBColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CARGBColor.swift; sourceTree = "<group>"; };
+		BB9B79911E5FCE9E0024C8DE /* CAColorArtwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CAColorArtwork.swift; path = ColorArtwork/CAColorArtwork.swift; sourceTree = "<group>"; };
+		BB9B79961E5FCEB00024C8DE /* CARGBColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CARGBColor.swift; path = ColorArtwork/CARGBColor.swift; sourceTree = "<group>"; };
 		BBA71A7E1E6020F500E347C1 /* .travis.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .travis.yml; sourceTree = "<group>"; };
 		BBA71A801E60291800E347C1 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		BBA71A821E6033DC00E347C1 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		BBCB18B51E6087BE009845CC /* Package.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		BBE06BAD1E5FDD9500DE3A50 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		BBE06BAF1E5FDD9500DE3A50 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
+		BBE06BAF1E5FDD9500DE3A50 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Tests.swift; path = ColorArtworkTests/Tests.swift; sourceTree = "<group>"; };
 		BBE06BB11E5FDD9500DE3A50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BBE06BB81E5FDF4C00DE3A50 /* Stadium Arcadium.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Stadium Arcadium.jpg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -122,8 +121,7 @@
 		BB9B797F1E5FC62C0024C8DE /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				BB9B79961E5FCEB00024C8DE /* CARGBColor.swift */,
-				BB9B79911E5FCE9E0024C8DE /* CAColorArtwork.swift */,
+				BBCB18B71E608D6D009845CC /* ColorArtwork */,
 				BBE06B991E5FDB2000DE3A50 /* Supporting Files */,
 			);
 			path = Sources;
@@ -135,8 +133,26 @@
 				BBA71A7E1E6020F500E347C1 /* .travis.yml */,
 				BBA71A801E60291800E347C1 /* README.md */,
 				BBA71A821E6033DC00E347C1 /* LICENSE */,
+				BBCB18B51E6087BE009845CC /* Package.swift */,
 			);
 			name = Metadata;
+			sourceTree = "<group>";
+		};
+		BBCB18B71E608D6D009845CC /* ColorArtwork */ = {
+			isa = PBXGroup;
+			children = (
+				BB9B79961E5FCEB00024C8DE /* CARGBColor.swift */,
+				BB9B79911E5FCE9E0024C8DE /* CAColorArtwork.swift */,
+			);
+			name = ColorArtwork;
+			sourceTree = "<group>";
+		};
+		BBCB18B81E608D74009845CC /* ColorArtworkTests */ = {
+			isa = PBXGroup;
+			children = (
+				BBE06BAF1E5FDD9500DE3A50 /* Tests.swift */,
+			);
+			name = ColorArtworkTests;
 			sourceTree = "<group>";
 		};
 		BBE06B991E5FDB2000DE3A50 /* Supporting Files */ = {
@@ -155,7 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				BBE06BB81E5FDF4C00DE3A50 /* Stadium Arcadium.jpg */,
-				BBE06BAF1E5FDD9500DE3A50 /* Tests.swift */,
+				BBCB18B81E608D74009845CC /* ColorArtworkTests */,
 				BBE06BB11E5FDD9500DE3A50 /* Info.plist */,
 			);
 			path = Tests;
@@ -355,7 +371,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BBA71A831E6033DC00E347C1 /* LICENSE in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -395,7 +410,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BBA71A811E60291800E347C1 /* README.md in Sources */,
 				BB9B79921E5FCE9E0024C8DE /* CAColorArtwork.swift in Sources */,
 				BB9B79971E5FCEB00024C8DE /* CARGBColor.swift in Sources */,
 			);
