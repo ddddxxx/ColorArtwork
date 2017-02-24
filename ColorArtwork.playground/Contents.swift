@@ -3,9 +3,11 @@
 import Cocoa
 import ColorArtwork
 
-let img = #imageLiteral(resourceName: "Stadium Arcadium.jpg").cgImage(forProposedRect: nil, context: nil, hints: nil)!
+let img = #imageLiteral(resourceName: "Stadium Arcadium.jpg")
 
-let ca = CAColorArtwork(image: img)
+let cgimg = img.cgImage(forProposedRect: nil, context: nil, hints: nil)!
+
+let ca = CAColorArtwork(image: cgimg)
 
 ca.analyze()
 
@@ -35,6 +37,8 @@ l3.frame = CGRect(x: 50, y: 50, width: 700, height: 150)
 l3.font = NSFont.systemFont(ofSize: 100)
 l3.textColor = detail
 view.addSubview(l3)
+
+img
 
 view
 
