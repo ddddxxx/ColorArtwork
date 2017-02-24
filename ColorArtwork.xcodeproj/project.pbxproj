@@ -11,6 +11,14 @@
 		BB9B79881E5FC7EE0024C8DE /* ColorArtwork.h in Headers */ = {isa = PBXBuildFile; fileRef = BB9B79521E5FC5470024C8DE /* ColorArtwork.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BB9B79891E5FC7EE0024C8DE /* ColorArtwork.h in Headers */ = {isa = PBXBuildFile; fileRef = BB9B79521E5FC5470024C8DE /* ColorArtwork.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BB9B798A1E5FC7EF0024C8DE /* ColorArtwork.h in Headers */ = {isa = PBXBuildFile; fileRef = BB9B79521E5FC5470024C8DE /* ColorArtwork.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BB9B79921E5FCE9E0024C8DE /* CAColorArtwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9B79911E5FCE9E0024C8DE /* CAColorArtwork.swift */; };
+		BB9B79931E5FCE9E0024C8DE /* CAColorArtwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9B79911E5FCE9E0024C8DE /* CAColorArtwork.swift */; };
+		BB9B79941E5FCE9E0024C8DE /* CAColorArtwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9B79911E5FCE9E0024C8DE /* CAColorArtwork.swift */; };
+		BB9B79951E5FCE9E0024C8DE /* CAColorArtwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9B79911E5FCE9E0024C8DE /* CAColorArtwork.swift */; };
+		BB9B79971E5FCEB00024C8DE /* CARGBColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9B79961E5FCEB00024C8DE /* CARGBColor.swift */; };
+		BB9B79981E5FCEB00024C8DE /* CARGBColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9B79961E5FCEB00024C8DE /* CARGBColor.swift */; };
+		BB9B79991E5FCEB00024C8DE /* CARGBColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9B79961E5FCEB00024C8DE /* CARGBColor.swift */; };
+		BB9B799A1E5FCEB00024C8DE /* CARGBColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9B79961E5FCEB00024C8DE /* CARGBColor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +31,8 @@
 		BB9B79811E5FC62C0024C8DE /* Info-macOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-macOS.plist"; sourceTree = "<group>"; };
 		BB9B79821E5FC62C0024C8DE /* Info-tvOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-tvOS.plist"; sourceTree = "<group>"; };
 		BB9B79831E5FC62C0024C8DE /* Info-watchOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-watchOS.plist"; sourceTree = "<group>"; };
+		BB9B79911E5FCE9E0024C8DE /* CAColorArtwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CAColorArtwork.swift; sourceTree = "<group>"; };
+		BB9B79961E5FCEB00024C8DE /* CARGBColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CARGBColor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +94,8 @@
 				BB9B79821E5FC62C0024C8DE /* Info-tvOS.plist */,
 				BB9B79831E5FC62C0024C8DE /* Info-watchOS.plist */,
 				BB9B79521E5FC5470024C8DE /* ColorArtwork.h */,
+				BB9B79961E5FCEB00024C8DE /* CARGBColor.swift */,
+				BB9B79911E5FCE9E0024C8DE /* CAColorArtwork.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -209,21 +221,25 @@
 					BB9B794E1E5FC5470024C8DE = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = KCY8NMTG34;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
 					BB9B795C1E5FC5790024C8DE = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = KCY8NMTG34;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
 					BB9B79691E5FC5950024C8DE = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = KCY8NMTG34;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
 					BB9B79761E5FC5A70024C8DE = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = KCY8NMTG34;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -284,6 +300,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB9B79921E5FCE9E0024C8DE /* CAColorArtwork.swift in Sources */,
+				BB9B79971E5FCEB00024C8DE /* CARGBColor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,6 +309,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB9B79931E5FCE9E0024C8DE /* CAColorArtwork.swift in Sources */,
+				BB9B79981E5FCEB00024C8DE /* CARGBColor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,6 +318,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB9B79941E5FCE9E0024C8DE /* CAColorArtwork.swift in Sources */,
+				BB9B79991E5FCEB00024C8DE /* CARGBColor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -305,6 +327,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB9B79951E5FCE9E0024C8DE /* CAColorArtwork.swift in Sources */,
+				BB9B799A1E5FCEB00024C8DE /* CARGBColor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

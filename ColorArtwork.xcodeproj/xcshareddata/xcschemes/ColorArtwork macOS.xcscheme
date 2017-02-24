@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "BB9B794E1E5FC5470024C8DE"
-               BuildableName = "ColorArtwork macOS.framework"
+               BuildableName = "ColorArtwork.framework"
                BlueprintName = "ColorArtwork macOS"
                ReferencedContainer = "container:ColorArtwork.xcodeproj">
             </BuildableReference>
@@ -46,7 +46,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "BB9B794E1E5FC5470024C8DE"
-            BuildableName = "ColorArtwork macOS.framework"
+            BuildableName = "ColorArtwork.framework"
             BlueprintName = "ColorArtwork macOS"
             ReferencedContainer = "container:ColorArtwork.xcodeproj">
          </BuildableReference>
@@ -64,7 +64,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "BB9B794E1E5FC5470024C8DE"
-            BuildableName = "ColorArtwork macOS.framework"
+            BuildableName = "ColorArtwork.framework"
             BlueprintName = "ColorArtwork macOS"
             ReferencedContainer = "container:ColorArtwork.xcodeproj">
          </BuildableReference>
