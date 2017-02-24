@@ -11,7 +11,7 @@ import CoreGraphics
 
 public class CAColorArtwork {
     
-    var image: CGImage
+    public var image: CGImage
     
     public var backgroundColor: CGColor?
     public var primaryColor: CGColor?
