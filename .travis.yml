@@ -2,10 +2,10 @@ language: objective-c
 osx_image: xcode8
 
 env:
-- ACTION=test  PLATFORM=macOS   SCHEME='ColorArtwork macOS'     DESTINATION='platform=OS X'
-- ACTION=build PLATFORM=iOS     SCHEME='ColorArtwork iOS'       DESTINATION='platform=iOS Simulator,name=iPhone 6S'
-- ACTION=build PLATFORM=tvOS    SCHEME='ColorArtwork tvOS'      DESTINATION='platform=tvOS Simulator,name=Apple TV 1080p'
-- ACTION=build PLATFORM=watchOS SCHEME='ColorArtwork watchOS'   DESTINATION='platform=watchOS Simulator,name=Apple Watch - 42mm'
+  - ACTION=test  PLATFORM=macOS   SCHEME='ColorArtwork macOS'     DESTINATION='platform=OS X'
+  - ACTION=build PLATFORM=iOS     SCHEME='ColorArtwork iOS'       DESTINATION='platform=iOS Simulator,name=iPhone 6S'
+  - ACTION=build PLATFORM=tvOS    SCHEME='ColorArtwork tvOS'      DESTINATION='platform=tvOS Simulator,name=Apple TV 1080p'
+  - ACTION=build PLATFORM=watchOS SCHEME='ColorArtwork watchOS'   DESTINATION='platform=watchOS Simulator,name=Apple Watch - 42mm'
 
 script:
-- set -o pipefail && xcodebuild -workspace ColorArtwork.xcworkspace -scheme "$SCHEME" -destination "$DESTINATION" $ACTION | xcpretty
+  - set -o pipefail && xcodebuild -workspace ColorArtwork.xcworkspace -scheme "$SCHEME" -destination "$DESTINATION" $ACTION | xcpretty
