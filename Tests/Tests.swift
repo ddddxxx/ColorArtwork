@@ -12,7 +12,7 @@ import XCTest
 
 class Tests: XCTestCase {
     
-    var testImages: [CGImage]!
+    var testImage: CGImage!
     
     override func setUp() {
         super.setUp()
@@ -21,7 +21,7 @@ class Tests: XCTestCase {
         let fileURL = bundle.urlForImageResource("Stadium Arcadium")!
         let img = NSImage(contentsOf: fileURL)!
         let cgimg = img.cgImage(forProposedRect: nil, context: nil, hints: nil)!
-        testImages = [cgimg]
+        testImage = cgimg
     }
     
     override func tearDown() {
@@ -29,8 +29,8 @@ class Tests: XCTestCase {
     }
     
     func testColorArtworkAnalyzing() {
-        testImages.forEach() { image in
-            let ca = CAColorArtwork(image: image)
+        measure {
+            let ca = CAColorArtwork(image: self.testImage)
             ca.analyze()
             XCTAssertNotNil(ca.backgroundColor)
         }
