@@ -1,7 +1,7 @@
 import Cocoa
 import ColorArtwork
 
-let img = #imageLiteral(resourceName: "Stadium Arcadium.jpg")
+let img = #imageLiteral(resourceName: "Making Mirrors.jpg")
 
 let cgimg = img.cgImage(forProposedRect: nil, context: nil, hints: nil)!
 
