@@ -89,15 +89,23 @@
 		BB9B797F1E5FC62C0024C8DE /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				BB9B79961E5FCEB00024C8DE /* CARGBColor.swift */,
+				BB9B79911E5FCE9E0024C8DE /* CAColorArtwork.swift */,
+				BBE06B991E5FDB2000DE3A50 /* Supporting Files */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		BBE06B991E5FDB2000DE3A50 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BB9B79521E5FC5470024C8DE /* ColorArtwork.h */,
 				BB9B79801E5FC62C0024C8DE /* Info-iOS.plist */,
 				BB9B79811E5FC62C0024C8DE /* Info-macOS.plist */,
 				BB9B79821E5FC62C0024C8DE /* Info-tvOS.plist */,
 				BB9B79831E5FC62C0024C8DE /* Info-watchOS.plist */,
-				BB9B79521E5FC5470024C8DE /* ColorArtwork.h */,
-				BB9B79961E5FCEB00024C8DE /* CARGBColor.swift */,
-				BB9B79911E5FCE9E0024C8DE /* CAColorArtwork.swift */,
 			);
-			path = Sources;
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
