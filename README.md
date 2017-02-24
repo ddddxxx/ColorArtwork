@@ -1,5 +1,6 @@
 # ColorArtwork
 
+[![Build Status](https://travis-ci.org/XQS6LB3A/ColorArtwork.svg?branch=master)](https://travis-ci.org/XQS6LB3A/ColorArtwork)
 ![swift3](https://img.shields.io/badge/swift3-compatible-brightgreen.svg)
 ![platforms](https://img.shields.io/badge/platforms-iOS%208.0%2B%20%7C%20macOS%2010.10%2B%20%7C%20tvOS%209.0%2B%20%7C%20watchOS%202.0%2B-lightgrey.svg)
 ![license](https://img.shields.io/badge/license-MIT-blue.svg)
