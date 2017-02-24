@@ -104,7 +104,11 @@ public class CAColorArtwork {
     
     func findEdgeColor(in edgeColors: [CACountedRGBColor]) -> CARGBColor? {
         let threshold = edgeColors.count / 50
-        let colors = edgeColors.filter(){ $0.count > threshold }.sorted() { $0.count > $1.count }
+        let colors = edgeColors.filter(){
+            $0.count > threshold
+        }.sorted() {
+            $0.count > $1.count
+        }
         
         guard colors.count > 0 else {
             return nil
@@ -127,7 +131,11 @@ public class CAColorArtwork {
     }
     
     func findTextColor(in colors: [CACountedRGBColor], background: CARGBColor) -> (primary: CARGBColor?, secondary: CARGBColor?, detail: CARGBColor?) {
-        let colors = colors.filter(){ $0.count > 1 }.sorted() { $0.count > $1.count }
+        let colors = colors.filter(){
+            $0.color.isContrastable(with: background)
+        }.sorted() {
+            $0.count > $1.count
+        }
         
         var primary: CARGBColor? = nil
         var secondary: CARGBColor? = nil
@@ -135,9 +143,6 @@ public class CAColorArtwork {
         
         for countedColor in colors {
             let color = countedColor.color
-            guard color.isContrastable(with: background) else {
-                continue
-            }
             guard let c1 = primary else {
                 primary = color
                 continue
