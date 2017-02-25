@@ -99,7 +99,7 @@ public class CAColorArtwork {
             } else {
                 return nil
             }
-        }  as [CACountedRGBColor]
+        }
         
         let edgeColors = edgeColorSet.objectEnumerator().allObjects.flatMap() { color -> CACountedRGBColor? in
             guard let rgbColor = color as? CARGBColor else {
@@ -111,7 +111,7 @@ public class CAColorArtwork {
             } else {
                 return nil
             }
-        } as [CACountedRGBColor]
+        }
         
         return (colors, edgeColors)
     }
