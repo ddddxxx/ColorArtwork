@@ -19,7 +19,7 @@ public class CAColorArtwork {
     public var detailColor: CGColor?
     
     public init(image: CGImage, scale: CGSize?) {
-        if let size = scale {
+        if let size = scale, size.width > 0, size.height > 0 {
             self.image = image.scaling(to: size) ?? image
         } else {
             self.image = image
