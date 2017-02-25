@@ -18,17 +18,14 @@ public class CAColorArtwork {
     public var secondaryColor: CGColor?
     public var detailColor: CGColor?
     
-    public init(image: CGImage, scale: CGSize?) {
-        if let size = scale, size.width > 0, size.height > 0 {
-            self.image = image.scaling(to: size) ?? image
-        } else {
-            self.image = image
-        }
-    }
+    static public var defaultScaleSize = CGSize(width: 300, height: 300)
     
-    public convenience init(image: CGImage) {
-        let defaultSize = CGSize(width: 300, height: 300)
-        self.init(image: image, scale: defaultSize)
+    public init(image: CGImage, scale: CGSize = defaultScaleSize) {
+        if scale == .zero {
+            self.image = image
+        } else {
+            self.image = image.scaling(to: scale) ?? image
+        }
     }
     
     public func analyze() {
