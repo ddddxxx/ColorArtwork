@@ -55,6 +55,11 @@ public class CAColorArtwork {
         detailColor = textColors.detail?.cgColor ?? fallback
     }
     
+    public func analyze(completionHandler: () -> Void) {
+        analyze()
+        completionHandler()
+    }
+    
     func findColors() -> (colors: [CACountedRGBColor], edgeColors: [CACountedRGBColor])? {
         let width = image.width
         let height = image.height
