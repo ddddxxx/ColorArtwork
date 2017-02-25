@@ -36,14 +36,14 @@
 
 /* Begin PBXFileReference section */
 		BB9B794F1E5FC5470024C8DE /* ColorArtwork.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ColorArtwork.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BB9B79521E5FC5470024C8DE /* ColorArtwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColorArtwork.h; sourceTree = "<group>"; };
+		BB9B79521E5FC5470024C8DE /* ColorArtwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ColorArtwork.h; path = "Supporting Files/ColorArtwork.h"; sourceTree = "<group>"; };
 		BB9B795D1E5FC5790024C8DE /* ColorArtwork.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ColorArtwork.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB9B796A1E5FC5950024C8DE /* ColorArtwork.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ColorArtwork.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB9B79771E5FC5A70024C8DE /* ColorArtwork.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ColorArtwork.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BB9B79801E5FC62C0024C8DE /* Info-iOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-iOS.plist"; sourceTree = "<group>"; };
-		BB9B79811E5FC62C0024C8DE /* Info-macOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-macOS.plist"; sourceTree = "<group>"; };
-		BB9B79821E5FC62C0024C8DE /* Info-tvOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-tvOS.plist"; sourceTree = "<group>"; };
-		BB9B79831E5FC62C0024C8DE /* Info-watchOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-watchOS.plist"; sourceTree = "<group>"; };
+		BB9B79801E5FC62C0024C8DE /* Info-iOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Info-iOS.plist"; path = "Supporting Files/Info-iOS.plist"; sourceTree = "<group>"; };
+		BB9B79811E5FC62C0024C8DE /* Info-macOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Info-macOS.plist"; path = "Supporting Files/Info-macOS.plist"; sourceTree = "<group>"; };
+		BB9B79821E5FC62C0024C8DE /* Info-tvOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Info-tvOS.plist"; path = "Supporting Files/Info-tvOS.plist"; sourceTree = "<group>"; };
+		BB9B79831E5FC62C0024C8DE /* Info-watchOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Info-watchOS.plist"; path = "Supporting Files/Info-watchOS.plist"; sourceTree = "<group>"; };
 		BB9B79911E5FCE9E0024C8DE /* CAColorArtwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CAColorArtwork.swift; path = ColorArtwork/CAColorArtwork.swift; sourceTree = "<group>"; };
 		BB9B79961E5FCEB00024C8DE /* CARGBColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CARGBColor.swift; path = ColorArtwork/CARGBColor.swift; sourceTree = "<group>"; };
 		BBA71A7E1E6020F500E347C1 /* .travis.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .travis.yml; sourceTree = "<group>"; };
@@ -53,7 +53,7 @@
 		BBE06BAD1E5FDD9500DE3A50 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBE06BAF1E5FDD9500DE3A50 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Tests.swift; path = ColorArtworkTests/Tests.swift; sourceTree = "<group>"; };
 		BBE06BB11E5FDD9500DE3A50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BBE06BB81E5FDF4C00DE3A50 /* Stadium Arcadium.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Stadium Arcadium.jpg"; sourceTree = "<group>"; };
+		BBE06BB81E5FDF4C00DE3A50 /* Stadium Arcadium.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "Stadium Arcadium.jpg"; path = "Supporting Files/Stadium Arcadium.jpg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,7 +121,8 @@
 		BB9B797F1E5FC62C0024C8DE /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				BBCB18B71E608D6D009845CC /* ColorArtwork */,
+				BB9B79961E5FCEB00024C8DE /* CARGBColor.swift */,
+				BB9B79911E5FCE9E0024C8DE /* CAColorArtwork.swift */,
 				BBE06B991E5FDB2000DE3A50 /* Supporting Files */,
 			);
 			path = Sources;
@@ -138,21 +139,12 @@
 			name = Metadata;
 			sourceTree = "<group>";
 		};
-		BBCB18B71E608D6D009845CC /* ColorArtwork */ = {
+		BBCB18B91E61DD7C009845CC /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				BB9B79961E5FCEB00024C8DE /* CARGBColor.swift */,
-				BB9B79911E5FCE9E0024C8DE /* CAColorArtwork.swift */,
+				BBE06BB11E5FDD9500DE3A50 /* Info.plist */,
 			);
-			name = ColorArtwork;
-			sourceTree = "<group>";
-		};
-		BBCB18B81E608D74009845CC /* ColorArtworkTests */ = {
-			isa = PBXGroup;
-			children = (
-				BBE06BAF1E5FDD9500DE3A50 /* Tests.swift */,
-			);
-			name = ColorArtworkTests;
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		BBE06B991E5FDB2000DE3A50 /* Supporting Files */ = {
@@ -170,9 +162,9 @@
 		BBE06BAE1E5FDD9500DE3A50 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				BBE06BAF1E5FDD9500DE3A50 /* Tests.swift */,
 				BBE06BB81E5FDF4C00DE3A50 /* Stadium Arcadium.jpg */,
-				BBCB18B81E608D74009845CC /* ColorArtworkTests */,
-				BBE06BB11E5FDD9500DE3A50 /* Info.plist */,
+				BBCB18B91E61DD7C009845CC /* Supporting Files */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
