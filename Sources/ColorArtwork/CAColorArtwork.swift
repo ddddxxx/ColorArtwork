@@ -18,8 +18,17 @@ public class CAColorArtwork {
     public var secondaryColor: CGColor?
     public var detailColor: CGColor?
     
-    public init(image: CGImage) {
-        self.image = image
+    public init(image: CGImage, scale: CGSize?) {
+        if let size = scale {
+            self.image = image.scaling(to: size) ?? image
+        } else {
+            self.image = image
+        }
+    }
+    
+    public convenience init(image: CGImage) {
+        let defaultSize = CGSize(width: 300, height: 300)
+        self.init(image: image, scale: defaultSize)
     }
     
     public func analyze() {
@@ -85,7 +94,7 @@ public class CAColorArtwork {
             } else {
                 return nil
             }
-        }  as [CACountedRGBColor]//.sorted() { $0.count > $1.count }
+        }  as [CACountedRGBColor]
         
         let edgeColors = edgeColorSet.objectEnumerator().allObjects.flatMap() { color -> CACountedRGBColor? in
             guard let rgbColor = color as? CARGBColor else {
@@ -97,7 +106,7 @@ public class CAColorArtwork {
             } else {
                 return nil
             }
-        } as [CACountedRGBColor]//.sorted() { $0.count > $1.count }
+        } as [CACountedRGBColor]
         
         return (colors, edgeColors)
     }
@@ -163,6 +172,27 @@ public class CAColorArtwork {
         }
         
         return (primary, secondary, detail)
+    }
+    
+}
+
+extension CGImage {
+    
+    func scaling(to size: CGSize) -> CGImage? {
+        guard let colorSpace = self.colorSpace else {
+            return nil
+        }
+        
+        let context = CGContext(data: nil,
+                                width: Int(size.width),
+                                height: Int(size.height),
+                                bitsPerComponent: bitsPerComponent,
+                                bytesPerRow: bytesPerRow,
+                                space: colorSpace,
+                                bitmapInfo: bitmapInfo.rawValue)
+        context?.draw(self, in: CGRect(origin: .zero, size: size))
+        
+        return context?.makeImage()
     }
     
 }
