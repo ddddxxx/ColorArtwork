@@ -102,7 +102,7 @@ public class CAColorArtwork {
             guard let rgbColor = color as? CARGBColor else {
                 return nil
             }
-            let count = colorSet.count(for: rgbColor)
+            let count = edgeColorSet.count(for: rgbColor)
             if count > 2 {
                 return CACountedRGBColor(color: rgbColor, count: count)
             } else {
