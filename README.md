@@ -11,7 +11,7 @@ Swift-based iTunes 11-style color matching code. Inspired by [Panic Blog](https:
 
 ## Requirements
 
-- macOS 10.10+ / iOS 8.0+ / tvOS 9.0+ / watchOS 2.0+
+- macOS 10.10+ / iOS 9.0+ / tvOS 9.0+ / watchOS 2.0+
 - Xcode 8+
 - Swift 3.0+
 
