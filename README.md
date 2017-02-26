@@ -5,13 +5,13 @@
 ![platforms](https://img.shields.io/badge/platforms-macOS%20%7C%20iOS%20%7C%20tvOS%20%7C%20watchOS-lightgrey.svg)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-Swift-based iTunes 11-style color matching code. Inspired by [Panic Blog](https://panic.com/blog/itunes-11-and-colors/)
+Swift-based iTunes 11-style color matching code. Inspired by [Panic Blog](https://panic.com/blog/itunes-11-and-colors/).
 
 ![preview](docs/img/preview.png)
 
 ## Requirements
 
-- macOS 10.10+ / iOS 8.0+ / tvOS 9.0+ / watchOS 2.0+
+- macOS 10.10+ / iOS 9.0+ / tvOS 9.0+ / watchOS 2.0+
 - Xcode 8+
 - Swift 3.0+
 
@@ -29,7 +29,7 @@ github "XQS6LB3A/ColorArtwork"
 
 Add the project to your `Package.swift` file:
 
-```
+```swift
 let package = Package(
     dependencies: [
         .Package(url: "https://github.com/XQS6LB3A/ColorArtwork", majorVersion: 0)
@@ -39,12 +39,12 @@ let package = Package(
 
 ## Usage
 
-```
+```swift
 import ColorArtwork
 ```
 
-```
-let colorArtwork = CAColorArtwork(image: AN_IMAGE)
+```swift
+let colorArtwork = CAColorArtwork(image: IMAGE, scale: SCALE_DOWN_SIZE)
 
 colorArtwork.analyze()
 

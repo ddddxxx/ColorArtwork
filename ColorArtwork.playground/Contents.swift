@@ -1,11 +1,11 @@
 import Cocoa
 import ColorArtwork
 
-let img = #imageLiteral(resourceName: "Making Mirrors.jpg")
+let image = #imageLiteral(resourceName: "Making Mirrors.jpg")
 
-let cgimg = img.cgImage(forProposedRect: nil, context: nil, hints: nil)!
+let cgimage = image.cgImage(forProposedRect: nil, context: nil, hints: nil)!
 
-let ca = CAColorArtwork(image: cgimg)
+let colorArtwork = CAColorArtwork(image: cgimage)
 
-ca.analyze()
+colorArtwork.analyze()
 

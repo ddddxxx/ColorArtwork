@@ -18,19 +18,34 @@ public class CAColorArtwork {
     public var secondaryColor: CGColor?
     public var detailColor: CGColor?
     
-    public init(image: CGImage) {
-        self.image = image
+    static public var defaultScaleSize = CGSize(width: 300, height: 300)
+    
+    public init(image: CGImage, scale: CGSize = defaultScaleSize) {
+        guard scale != .zero else {
+            self.image = image
+            return
+        }
+        
+        // never scale up
+        guard image.width > Int(scale.width),
+            image.height > Int(scale.height) else {
+            self.image = image
+            return
+        }
+        
+        self.image = image.scaling(to: scale) ?? image
     }
     
     public func analyze() {
-        guard let (colors, edgeColors) = findColors() else {
-            return
+        guard let data = image.dataProvider?.data,
+            let dataPtr = CFDataGetBytePtr(data) else {
+                return
         }
         
-        guard let background = findEdgeColor(in: edgeColors) else {
-            return
-        }
+        let edgeColors = findEdgeColors(data: dataPtr)
+        let background = findEdgeColor(in: edgeColors) ?? CARGBColor(r: 1, g: 1, b: 1)
         
+        let colors = findColors(data: dataPtr, isDarkBackground: background.isDark)
         let textColors = findTextColor(in: colors, background: background)
         
         let fallback:CGColor
@@ -46,7 +61,12 @@ public class CAColorArtwork {
         detailColor = textColors.detail?.cgColor ?? fallback
     }
     
-    func findColors() -> (colors: [CACountedRGBColor], edgeColors: [CACountedRGBColor])? {
+    public func analyze(completionHandler: () -> Void) {
+        analyze()
+        completionHandler()
+    }
+    
+    func findEdgeColors(data: UnsafePointer<UInt8>) -> [CACountedRGBColor] {
         let width = image.width
         let height = image.height
         
@@ -55,51 +75,66 @@ public class CAColorArtwork {
         let bpc = image.bitsPerComponent
         let bytesPerPixel = bpp / bpc
         
-        guard let data = image.dataProvider?.data as? Data else {
-            return nil
+        let edgeColorSet = NSCountedSet()
+        
+        for row in 0 ..< height {
+            let leftEdgeIndex = row * bpr
+            let leftEdgeColor = CARGBColor(compnents: data + leftEdgeIndex)
+            edgeColorSet.add(leftEdgeColor)
+            
+            let rightEdgeIndex = row * bpr + (width-1) * bytesPerPixel
+            let rightEdgeColor = CARGBColor(compnents: data + rightEdgeIndex)
+            edgeColorSet.add(rightEdgeColor)
+        }
+        for col in 0 ..< width {
+            let topEdgeIndex = col * bytesPerPixel
+            let topEdgeColor = CARGBColor(compnents: data + topEdgeIndex)
+            edgeColorSet.add(topEdgeColor)
+            
+            let bottomEdgeIndex = (height-1) * bpr + col * bytesPerPixel
+            let bottomEdgeColor = CARGBColor(compnents: data + bottomEdgeIndex)
+            edgeColorSet.add(bottomEdgeColor)
         }
         
+        let edgeColors = edgeColorSet.objectEnumerator().allObjects.map() {
+            CACountedRGBColor(color: ($0 as! CARGBColor), count: edgeColorSet.count(for: $0))
+        }
+        
+        return edgeColors
+    }
+    
+    func findColors(data: UnsafePointer<UInt8>, isDarkBackground: Bool) -> [CACountedRGBColor] {
+        let width = image.width
+        let height = image.height
+        
+        let bpr = image.bytesPerRow
+        let bpp = image.bitsPerPixel
+        let bpc = image.bitsPerComponent
+        let bytesPerPixel = bpp / bpc
+        
         let colorSet = NSCountedSet()
-        let edgeColorSet = NSCountedSet()
         
         for row in 0 ..< height {
             for col in 0 ..< width {
                 let index = row * bpr + col * bytesPerPixel
-                let color = CARGBColor(r: CGFloat(data[index]) / 255,
-                                       g: CGFloat(data[index+1]) / 255,
-                                       b: CGFloat(data[index+2]) / 255)
-                colorSet.add(color)
-                if row==0 || row==height-1 || col==0 || col==width-1 {
-                    edgeColorSet.add(color)
+                let color = CARGBColor(compnents: data + index)
+                if color.isDark != isDarkBackground {
+                    colorSet.add(color)
                 }
             }
         }
         
         let colors = colorSet.objectEnumerator().allObjects.flatMap() { color -> CACountedRGBColor? in
-            guard let rgbColor = color as? CARGBColor else {
-                return nil
-            }
-            let count = colorSet.count(for: rgbColor)
+            let color = color as! CARGBColor
+            let count = colorSet.count(for: color)
             if count > 2 {
-                return CACountedRGBColor(color: rgbColor, count: count)
+                return CACountedRGBColor(color: color, count: count)
             } else {
                 return nil
             }
-        }  as [CACountedRGBColor]//.sorted() { $0.count > $1.count }
+        }
         
-        let edgeColors = edgeColorSet.objectEnumerator().allObjects.flatMap() { color -> CACountedRGBColor? in
-            guard let rgbColor = color as? CARGBColor else {
-                return nil
-            }
-            let count = colorSet.count(for: rgbColor)
-            if count > 2 {
-                return CACountedRGBColor(color: rgbColor, count: count)
-            } else {
-                return nil
-            }
-        } as [CACountedRGBColor]//.sorted() { $0.count > $1.count }
-        
-        return (colors, edgeColors)
+        return colors
     }
     
     func findEdgeColor(in edgeColors: [CACountedRGBColor]) -> CARGBColor? {
@@ -142,7 +177,7 @@ public class CAColorArtwork {
         var detail: CARGBColor? = nil
         
         for countedColor in colors {
-            let color = countedColor.color
+            let color = countedColor.color.withMinimumSaturation(0.15)
             guard let c1 = primary else {
                 primary = color
                 continue
@@ -163,6 +198,27 @@ public class CAColorArtwork {
         }
         
         return (primary, secondary, detail)
+    }
+    
+}
+
+extension CGImage {
+    
+    func scaling(to size: CGSize) -> CGImage? {
+        guard let colorSpace = self.colorSpace else {
+            return nil
+        }
+        
+        let context = CGContext(data: nil,
+                                width: Int(size.width),
+                                height: Int(size.height),
+                                bitsPerComponent: bitsPerComponent,
+                                bytesPerRow: bytesPerRow,
+                                space: colorSpace,
+                                bitmapInfo: bitmapInfo.rawValue)
+        context?.draw(self, in: CGRect(origin: .zero, size: size))
+        
+        return context?.makeImage()
     }
     
 }
