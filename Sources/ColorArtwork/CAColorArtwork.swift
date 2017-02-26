@@ -21,11 +21,19 @@ public class CAColorArtwork {
     static public var defaultScaleSize = CGSize(width: 300, height: 300)
     
     public init(image: CGImage, scale: CGSize = defaultScaleSize) {
-        if scale == .zero {
+        guard scale != .zero else {
             self.image = image
-        } else {
-            self.image = image.scaling(to: scale) ?? image
+            return
         }
+        
+        // never scale up
+        guard image.width > Int(scale.width),
+            image.height > Int(scale.height) else {
+            self.image = image
+            return
+        }
+        
+        self.image = image.scaling(to: scale) ?? image
     }
     
     public func analyze() {
