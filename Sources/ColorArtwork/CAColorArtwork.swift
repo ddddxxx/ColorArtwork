@@ -37,13 +37,16 @@ public class CAColorArtwork {
     }
     
     public func analyze() {
-        guard let edgeColors = findEdgeColors(),
-            let background = findEdgeColor(in: edgeColors) else {
-            return
+        guard let data = image.dataProvider?.data,
+            let dataPtr = CFDataGetBytePtr(data) else {
+                return
         }
         
-        let colors = findColors(isDarkBackground: background.isDark)
-        let textColors = colors.flatMap() { findTextColor(in: $0, background: background) }
+        let edgeColors = findEdgeColors(data: dataPtr)
+        let background = findEdgeColor(in: edgeColors) ?? CARGBColor(r: 1, g: 1, b: 1)
+        
+        let colors = findColors(data: dataPtr, isDarkBackground: background.isDark)
+        let textColors = findTextColor(in: colors, background: background)
         
         let fallback:CGColor
         if background.isDark {
@@ -53,9 +56,9 @@ public class CAColorArtwork {
         }
         
         backgroundColor = background.cgColor
-        primaryColor = textColors?.primary?.cgColor ?? fallback
-        secondaryColor = textColors?.secondary?.cgColor ?? fallback
-        detailColor = textColors?.detail?.cgColor ?? fallback
+        primaryColor = textColors.primary?.cgColor ?? fallback
+        secondaryColor = textColors.secondary?.cgColor ?? fallback
+        detailColor = textColors.detail?.cgColor ?? fallback
     }
     
     public func analyze(completionHandler: () -> Void) {
@@ -63,7 +66,7 @@ public class CAColorArtwork {
         completionHandler()
     }
     
-    func findEdgeColors() -> [CACountedRGBColor]? {
+    func findEdgeColors(data: UnsafePointer<UInt8>) -> [CACountedRGBColor] {
         let width = image.width
         let height = image.height
         
@@ -72,29 +75,24 @@ public class CAColorArtwork {
         let bpc = image.bitsPerComponent
         let bytesPerPixel = bpp / bpc
         
-        guard let data = image.dataProvider?.data,
-            let dataPtr = CFDataGetBytePtr(data) else {
-            return nil
-        }
-        
         let edgeColorSet = NSCountedSet()
         
         for row in 0 ..< height {
             let leftEdgeIndex = row * bpr
-            let leftEdgeColor = CARGBColor(compnents: dataPtr + leftEdgeIndex)
+            let leftEdgeColor = CARGBColor(compnents: data + leftEdgeIndex)
             edgeColorSet.add(leftEdgeColor)
             
             let rightEdgeIndex = row * bpr + (width-1) * bytesPerPixel
-            let rightEdgeColor = CARGBColor(compnents: dataPtr + rightEdgeIndex)
+            let rightEdgeColor = CARGBColor(compnents: data + rightEdgeIndex)
             edgeColorSet.add(rightEdgeColor)
         }
         for col in 0 ..< width {
             let topEdgeIndex = col * bytesPerPixel
-            let topEdgeColor = CARGBColor(compnents: dataPtr + topEdgeIndex)
+            let topEdgeColor = CARGBColor(compnents: data + topEdgeIndex)
             edgeColorSet.add(topEdgeColor)
             
             let bottomEdgeIndex = (height-1) * bpr + col * bytesPerPixel
-            let bottomEdgeColor = CARGBColor(compnents: dataPtr + bottomEdgeIndex)
+            let bottomEdgeColor = CARGBColor(compnents: data + bottomEdgeIndex)
             edgeColorSet.add(bottomEdgeColor)
         }
         
@@ -105,7 +103,7 @@ public class CAColorArtwork {
         return edgeColors
     }
     
-    func findColors(isDarkBackground: Bool) -> [CACountedRGBColor]? {
+    func findColors(data: UnsafePointer<UInt8>, isDarkBackground: Bool) -> [CACountedRGBColor] {
         let width = image.width
         let height = image.height
         
@@ -114,17 +112,12 @@ public class CAColorArtwork {
         let bpc = image.bitsPerComponent
         let bytesPerPixel = bpp / bpc
         
-        guard let data = image.dataProvider?.data,
-            let dataPtr = CFDataGetBytePtr(data) else {
-                return nil
-        }
-        
         let colorSet = NSCountedSet()
         
         for row in 0 ..< height {
             for col in 0 ..< width {
                 let index = row * bpr + col * bytesPerPixel
-                let color = CARGBColor(compnents: dataPtr + index)
+                let color = CARGBColor(compnents: data + index)
                 if color.isDark != isDarkBackground {
                     colorSet.add(color)
                 }
