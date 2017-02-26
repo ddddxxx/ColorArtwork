@@ -153,7 +153,7 @@ public class CAColorArtwork {
         var detail: CARGBColor? = nil
         
         for countedColor in colors {
-            let color = countedColor.color
+            let color = countedColor.color.withMinimumSaturation(0.15)
             guard let c1 = primary else {
                 primary = color
                 continue
