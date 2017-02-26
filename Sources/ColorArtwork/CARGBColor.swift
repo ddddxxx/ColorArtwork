@@ -15,6 +15,18 @@ struct CARGBColor {
     let g: CGFloat
     let b: CGFloat
     
+    init(r:CGFloat, g: CGFloat, b: CGFloat) {
+        self.r = r
+        self.g = g
+        self.b = b
+    }
+    
+    init(compnents: UnsafePointer<UInt8>) {
+        self.r = CGFloat(compnents[0]) / 255
+        self.g = CGFloat(compnents[1]) / 255
+        self.b = CGFloat(compnents[2]) / 255
+    }
+    
     var luma: CGFloat {
         return 0.2126 * r + 0.7152 * g + 0.0722 * b
     }

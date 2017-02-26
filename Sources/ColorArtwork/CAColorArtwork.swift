@@ -72,7 +72,8 @@ public class CAColorArtwork {
         let bpc = image.bitsPerComponent
         let bytesPerPixel = bpp / bpc
         
-        guard let data = image.dataProvider?.data as? Data else {
+        guard let data = image.dataProvider?.data,
+            let dataPtr = CFDataGetBytePtr(data) else {
             return nil
         }
         
@@ -80,28 +81,20 @@ public class CAColorArtwork {
         
         for row in 0 ..< height {
             let leftEdgeIndex = row * bpr
-            let leftEdgeColor = CARGBColor(r: CGFloat(data[leftEdgeIndex]) / 255,
-                                           g: CGFloat(data[leftEdgeIndex+1]) / 255,
-                                           b: CGFloat(data[leftEdgeIndex+2]) / 255)
+            let leftEdgeColor = CARGBColor(compnents: dataPtr + leftEdgeIndex)
             edgeColorSet.add(leftEdgeColor)
             
             let rightEdgeIndex = row * bpr + (width-1) * bytesPerPixel
-            let rightEdgeColor = CARGBColor(r: CGFloat(data[rightEdgeIndex]) / 255,
-                                            g: CGFloat(data[rightEdgeIndex+1]) / 255,
-                                            b: CGFloat(data[rightEdgeIndex+2]) / 255)
+            let rightEdgeColor = CARGBColor(compnents: dataPtr + rightEdgeIndex)
             edgeColorSet.add(rightEdgeColor)
         }
         for col in 0 ..< width {
             let topEdgeIndex = col * bytesPerPixel
-            let topEdgeColor = CARGBColor(r: CGFloat(data[topEdgeIndex]) / 255,
-                                          g: CGFloat(data[topEdgeIndex+1]) / 255,
-                                          b: CGFloat(data[topEdgeIndex+2]) / 255)
+            let topEdgeColor = CARGBColor(compnents: dataPtr + topEdgeIndex)
             edgeColorSet.add(topEdgeColor)
             
             let bottomEdgeIndex = (height-1) * bpr + col * bytesPerPixel
-            let bottomEdgeColor = CARGBColor(r: CGFloat(data[bottomEdgeIndex]) / 255,
-                                             g: CGFloat(data[bottomEdgeIndex+1]) / 255,
-                                             b: CGFloat(data[bottomEdgeIndex+2]) / 255)
+            let bottomEdgeColor = CARGBColor(compnents: dataPtr + bottomEdgeIndex)
             edgeColorSet.add(bottomEdgeColor)
         }
         
@@ -121,8 +114,9 @@ public class CAColorArtwork {
         let bpc = image.bitsPerComponent
         let bytesPerPixel = bpp / bpc
         
-        guard let data = image.dataProvider?.data as? Data else {
-            return nil
+        guard let data = image.dataProvider?.data,
+            let dataPtr = CFDataGetBytePtr(data) else {
+                return nil
         }
         
         let colorSet = NSCountedSet()
@@ -130,9 +124,7 @@ public class CAColorArtwork {
         for row in 0 ..< height {
             for col in 0 ..< width {
                 let index = row * bpr + col * bytesPerPixel
-                let color = CARGBColor(r: CGFloat(data[index]) / 255,
-                                       g: CGFloat(data[index+1]) / 255,
-                                       b: CGFloat(data[index+2]) / 255)
+                let color = CARGBColor(compnents: dataPtr + index)
                 if color.isDark != isDarkBackground {
                     colorSet.add(color)
                 }
