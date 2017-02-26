@@ -44,7 +44,7 @@ import ColorArtwork
 ```
 
 ```swift
-let colorArtwork = CAColorArtwork(image: AN_IMAGE)
+let colorArtwork = CAColorArtwork(image: IMAGE, scale: SCALE_DOWN_SIZE)
 
 colorArtwork.analyze()
 
