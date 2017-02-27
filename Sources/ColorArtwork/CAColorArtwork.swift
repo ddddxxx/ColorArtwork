@@ -11,14 +11,14 @@ import CoreGraphics
 
 public class CAColorArtwork {
     
-    public var image: CGImage
+    var image: CGImage
     
     public var backgroundColor: CGColor?
     public var primaryColor: CGColor?
     public var secondaryColor: CGColor?
     public var detailColor: CGColor?
     
-    static public var defaultScaleSize = CGSize(width: 300, height: 300)
+    static let defaultScaleSize = CGSize(width: 300, height: 300)
     
     public init(image: CGImage, scale: CGSize = defaultScaleSize) {
         guard scale != .zero else {
@@ -138,7 +138,7 @@ public class CAColorArtwork {
     }
     
     func findEdgeColor(in edgeColors: [CACountedRGBColor]) -> CARGBColor? {
-        let threshold = edgeColors.count / 50
+        let threshold = edgeColors.count / 100
         let colors = edgeColors.filter(){
             $0.count > threshold
         }.sorted() {
@@ -205,16 +205,12 @@ public class CAColorArtwork {
 extension CGImage {
     
     func scaling(to size: CGSize) -> CGImage? {
-        guard let colorSpace = self.colorSpace else {
-            return nil
-        }
-        
         let context = CGContext(data: nil,
                                 width: Int(size.width),
                                 height: Int(size.height),
                                 bitsPerComponent: bitsPerComponent,
                                 bytesPerRow: bytesPerRow,
-                                space: colorSpace,
+                                space: CGColorSpace(name: CGColorSpace.sRGB)!,
                                 bitmapInfo: bitmapInfo.rawValue)
         context?.draw(self, in: CGRect(origin: .zero, size: size))
         
