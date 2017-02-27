@@ -11,14 +11,14 @@ import CoreGraphics
 
 public class CAColorArtwork {
     
-    public var image: CGImage
+    var image: CGImage
     
     public var backgroundColor: CGColor?
     public var primaryColor: CGColor?
     public var secondaryColor: CGColor?
     public var detailColor: CGColor?
     
-    static public var defaultScaleSize = CGSize(width: 300, height: 300)
+    static let defaultScaleSize = CGSize(width: 300, height: 300)
     
     public init(image: CGImage, scale: CGSize = defaultScaleSize) {
         guard scale != .zero else {
