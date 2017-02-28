@@ -12,8 +12,8 @@
     
     extension NSImage {
         
-        public func getProminentColor(scale size: NSSize? = nil) -> (backgroundColor: NSColor, primaryColor: NSColor, secondaryColor: NSColor, detailColor: NSColor) {
-            let (backgroundColor, primaryColor, secondaryColor, detailColor) = cgImage(forProposedRect: nil, context: nil, hints: nil)!.getProminentColor(scale: size)
+        public func getProminentColors(scale size: NSSize? = nil) -> (backgroundColor: NSColor, primaryColor: NSColor, secondaryColor: NSColor, detailColor: NSColor) {
+            let (backgroundColor, primaryColor, secondaryColor, detailColor) = cgImage(forProposedRect: nil, context: nil, hints: nil)!.getProminentColors(scale: size)
             
             return (NSColor(cgColor: backgroundColor)!, NSColor(cgColor: primaryColor)!, NSColor(cgColor: secondaryColor)!, NSColor(cgColor: detailColor)!)
         }
@@ -26,8 +26,8 @@
     
     extension UIImage {
         
-        public func getProminentColor(scale size: CGSize? = nil) -> (backgroundColor: UIColor, primaryColor: UIColor, secondaryColor: UIColor, detailColor: UIColor) {
-            let (backgroundColor, primaryColor, secondaryColor, detailColor) = cgImage!.getProminentColor(scale: size)
+        public func getProminentColors(scale size: CGSize? = nil) -> (backgroundColor: UIColor, primaryColor: UIColor, secondaryColor: UIColor, detailColor: UIColor) {
+            let (backgroundColor, primaryColor, secondaryColor, detailColor) = cgImage!.getProminentColors(scale: size)
             
             return (UIColor(cgColor: backgroundColor), UIColor(cgColor: primaryColor), UIColor(cgColor: secondaryColor), UIColor(cgColor: detailColor))
         }

@@ -9,7 +9,7 @@ public class ColorArtworkPreview: NSView {
     var yearTextField: NSTextField
     
     public init(image: NSImage, title: String, artist: String, year: String) {
-        let (backgroundColor, primaryColor, secondaryColor, detailColor) = image.getProminentColor()
+        let (backgroundColor, primaryColor, secondaryColor, detailColor) = image.getProminentColors()
         
         imageView = FadeImageView(frame: NSRect(x: 290, y: 10, width: 100, height: 100))
         imageView.image = image

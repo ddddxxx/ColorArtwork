@@ -11,7 +11,7 @@ import CoreGraphics
 
 extension CGImage {
     
-    public func getProminentColor(scale size: CGSize? = nil) -> (backgroundColor: CGColor, primaryColor: CGColor, secondaryColor: CGColor, detailColor: CGColor) {
+    public func getProminentColors(scale size: CGSize? = nil) -> (backgroundColor: CGColor, primaryColor: CGColor, secondaryColor: CGColor, detailColor: CGColor) {
         let colorArtwork = CAColorArtwork(image: self, scale: size)
         colorArtwork.analyze()
         guard let backgroundColor = colorArtwork.backgroundColor,

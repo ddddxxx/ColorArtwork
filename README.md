@@ -44,7 +44,7 @@ import ColorArtwork
 ```
 
 ```swift
-let (backgroundColor, primaryColor, secondaryColor, detailColor) = IMAGE.getProminentColor()
+let (backgroundColor, primaryColor, secondaryColor, detailColor) = IMAGE.getProminentColors()
 ```
 
 ## License
