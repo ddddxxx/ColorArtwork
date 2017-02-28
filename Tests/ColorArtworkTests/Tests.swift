@@ -28,11 +28,10 @@ class Tests: XCTestCase {
         super.tearDown()
     }
     
-    func testColorArtworkAnalyzing() {
+    func testExtensionAnalyzing() {
         measure {
-            let ca = CAColorArtwork(image: self.testImage)
-            ca.analyze()
-            XCTAssertNotNil(ca.backgroundColor)
+            let colors = self.testImage.getProminentColor()
+            XCTAssertNotNil(colors)
         }
     }
     
