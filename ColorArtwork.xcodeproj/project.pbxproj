@@ -19,6 +19,10 @@
 		BB9B79981E5FCEB00024C8DE /* CARGBColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9B79961E5FCEB00024C8DE /* CARGBColor.swift */; };
 		BB9B79991E5FCEB00024C8DE /* CARGBColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9B79961E5FCEB00024C8DE /* CARGBColor.swift */; };
 		BB9B799A1E5FCEB00024C8DE /* CARGBColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9B79961E5FCEB00024C8DE /* CARGBColor.swift */; };
+		BBCC24FF1E6565BF007BCC3D /* ConvenienceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCC24FE1E6565BF007BCC3D /* ConvenienceExtension.swift */; };
+		BBCC25001E6568F1007BCC3D /* ConvenienceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCC24FE1E6565BF007BCC3D /* ConvenienceExtension.swift */; };
+		BBCC25011E656998007BCC3D /* ConvenienceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCC24FE1E6565BF007BCC3D /* ConvenienceExtension.swift */; };
+		BBCC25021E656999007BCC3D /* ConvenienceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCC24FE1E6565BF007BCC3D /* ConvenienceExtension.swift */; };
 		BBE06BB01E5FDD9500DE3A50 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE06BAF1E5FDD9500DE3A50 /* Tests.swift */; };
 		BBE06BB21E5FDD9500DE3A50 /* ColorArtwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB9B794F1E5FC5470024C8DE /* ColorArtwork.framework */; };
 		BBE06BB91E5FDF4C00DE3A50 /* Stadium Arcadium.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BBE06BB81E5FDF4C00DE3A50 /* Stadium Arcadium.jpg */; };
@@ -50,9 +54,10 @@
 		BBA71A801E60291800E347C1 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		BBA71A821E6033DC00E347C1 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		BBCB18B51E6087BE009845CC /* Package.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
+		BBCC24FE1E6565BF007BCC3D /* ConvenienceExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConvenienceExtension.swift; path = ColorArtwork/ConvenienceExtension.swift; sourceTree = "<group>"; };
 		BBE06BAD1E5FDD9500DE3A50 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBE06BAF1E5FDD9500DE3A50 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Tests.swift; path = ColorArtworkTests/Tests.swift; sourceTree = "<group>"; };
-		BBE06BB11E5FDD9500DE3A50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BBE06BB11E5FDD9500DE3A50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "Supporting Files/Info.plist"; sourceTree = "<group>"; };
 		BBE06BB81E5FDF4C00DE3A50 /* Stadium Arcadium.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "Stadium Arcadium.jpg"; path = "Supporting Files/Stadium Arcadium.jpg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -123,6 +128,7 @@
 			children = (
 				BB9B79961E5FCEB00024C8DE /* CARGBColor.swift */,
 				BB9B79911E5FCE9E0024C8DE /* CAColorArtwork.swift */,
+				BBCC24FE1E6565BF007BCC3D /* ConvenienceExtension.swift */,
 				BBE06B991E5FDB2000DE3A50 /* Supporting Files */,
 			);
 			path = Sources;
@@ -404,6 +410,7 @@
 			files = (
 				BB9B79921E5FCE9E0024C8DE /* CAColorArtwork.swift in Sources */,
 				BB9B79971E5FCEB00024C8DE /* CARGBColor.swift in Sources */,
+				BBCC24FF1E6565BF007BCC3D /* ConvenienceExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -413,6 +420,7 @@
 			files = (
 				BB9B79931E5FCE9E0024C8DE /* CAColorArtwork.swift in Sources */,
 				BB9B79981E5FCEB00024C8DE /* CARGBColor.swift in Sources */,
+				BBCC25001E6568F1007BCC3D /* ConvenienceExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,6 +430,7 @@
 			files = (
 				BB9B79941E5FCE9E0024C8DE /* CAColorArtwork.swift in Sources */,
 				BB9B79991E5FCEB00024C8DE /* CARGBColor.swift in Sources */,
+				BBCC25011E656998007BCC3D /* ConvenienceExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -431,6 +440,7 @@
 			files = (
 				BB9B79951E5FCE9E0024C8DE /* CAColorArtwork.swift in Sources */,
 				BB9B799A1E5FCEB00024C8DE /* CARGBColor.swift in Sources */,
+				BBCC25021E656999007BCC3D /* ConvenienceExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

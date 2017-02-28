@@ -44,14 +44,7 @@ import ColorArtwork
 ```
 
 ```swift
-let colorArtwork = CAColorArtwork(image: IMAGE, scale: SCALE_DOWN_SIZE)
-
-colorArtwork.analyze()
-
-colorArtwork.backgroundColor
-colorArtwork.primaryColor
-colorArtwork.secondaryColor
-colorArtwork.detailColor
+let (backgroundColor, primaryColor, secondaryColor, detailColor) = IMAGE.getProminentColors()
 ```
 
 ## License

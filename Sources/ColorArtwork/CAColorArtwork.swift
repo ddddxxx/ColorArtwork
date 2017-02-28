@@ -9,20 +9,37 @@
 import Foundation
 import CoreGraphics
 
-public class CAColorArtwork {
+extension CGImage {
     
-    public var image: CGImage
+    public func getProminentColors(scale size: CGSize? = nil) -> (backgroundColor: CGColor, primaryColor: CGColor, secondaryColor: CGColor, detailColor: CGColor) {
+        let colorArtwork = CAColorArtwork(image: self, scale: size)
+        colorArtwork.analyze()
+        guard let backgroundColor = colorArtwork.backgroundColor,
+            let primaryColor = colorArtwork.primaryColor,
+            let secondaryColor = colorArtwork.secondaryColor,
+            let detailColor = colorArtwork.detailColor else {
+            return (.white, .black, .black, .black)
+        }
+        
+        return (backgroundColor, primaryColor, secondaryColor, detailColor)
+    }
     
-    public var backgroundColor: CGColor?
-    public var primaryColor: CGColor?
-    public var secondaryColor: CGColor?
-    public var detailColor: CGColor?
+}
+
+class CAColorArtwork {
     
-    static public var defaultScaleSize = CGSize(width: 300, height: 300)
+    var image: CGImage
     
-    public init(image: CGImage, scale: CGSize = defaultScaleSize) {
-        guard scale != .zero else {
-            self.image = image
+    var backgroundColor: CGColor?
+    var primaryColor: CGColor?
+    var secondaryColor: CGColor?
+    var detailColor: CGColor?
+    
+    static let defaultScaleSize = CGSize(width: 300, height: 300)
+    
+    init(image: CGImage, scale: CGSize?) {
+        guard let scale = scale, scale != .zero else {
+            self.image = image.scaling(to: CAColorArtwork.defaultScaleSize) ?? image
             return
         }
         
@@ -36,7 +53,7 @@ public class CAColorArtwork {
         self.image = image.scaling(to: scale) ?? image
     }
     
-    public func analyze() {
+    func analyze() {
         guard let data = image.dataProvider?.data,
             let dataPtr = CFDataGetBytePtr(data) else {
                 return
@@ -48,22 +65,12 @@ public class CAColorArtwork {
         let colors = findColors(data: dataPtr, isDarkBackground: background.isDark)
         let textColors = findTextColor(in: colors, background: background)
         
-        let fallback:CGColor
-        if background.isDark {
-            fallback = CGColor(colorSpace: CGColorSpace(name: CGColorSpace.sRGB)!, components: [1, 1, 1, 1])!
-        } else {
-            fallback = CGColor(colorSpace: CGColorSpace(name: CGColorSpace.sRGB)!, components: [0, 0, 0, 1])!
-        }
+        let fallback: CGColor = background.isDark ? .white : .black
         
         backgroundColor = background.cgColor
         primaryColor = textColors.primary?.cgColor ?? fallback
         secondaryColor = textColors.secondary?.cgColor ?? fallback
         detailColor = textColors.detail?.cgColor ?? fallback
-    }
-    
-    public func analyze(completionHandler: () -> Void) {
-        analyze()
-        completionHandler()
     }
     
     func findEdgeColors(data: UnsafePointer<UInt8>) -> [CACountedRGBColor] {
@@ -138,7 +145,7 @@ public class CAColorArtwork {
     }
     
     func findEdgeColor(in edgeColors: [CACountedRGBColor]) -> CARGBColor? {
-        let threshold = edgeColors.count / 50
+        let threshold = edgeColors.count / 100
         let colors = edgeColors.filter(){
             $0.count > threshold
         }.sorted() {
@@ -205,21 +212,25 @@ public class CAColorArtwork {
 extension CGImage {
     
     func scaling(to size: CGSize) -> CGImage? {
-        guard let colorSpace = self.colorSpace else {
-            return nil
-        }
-        
         let context = CGContext(data: nil,
                                 width: Int(size.width),
                                 height: Int(size.height),
                                 bitsPerComponent: bitsPerComponent,
                                 bytesPerRow: bytesPerRow,
-                                space: colorSpace,
+                                space: CGColorSpace(name: CGColorSpace.sRGB)!,
                                 bitmapInfo: bitmapInfo.rawValue)
         context?.draw(self, in: CGRect(origin: .zero, size: size))
         
         return context?.makeImage()
     }
+    
+}
+
+extension CGColor {
+    
+    static let white = CGColor(colorSpace: CGColorSpace(name: CGColorSpace.sRGB)!, components: [1, 1, 1, 1])!
+    
+    static let black = CGColor(colorSpace: CGColorSpace(name: CGColorSpace.sRGB)!, components: [0, 0, 0, 1])!
     
 }
 
