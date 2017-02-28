@@ -30,7 +30,7 @@ class Tests: XCTestCase {
     
     func testExtensionAnalyzing() {
         measure {
-            let colors = self.testImage.getProminentColor()
+            let colors = self.testImage.getProminentColors()
             XCTAssertNotNil(colors)
         }
     }
