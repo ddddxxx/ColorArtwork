@@ -9,20 +9,37 @@
 import Foundation
 import CoreGraphics
 
-public class CAColorArtwork {
+extension CGImage {
+    
+    public func getProminentColor(scale size: CGSize? = nil) -> (backgroundColor: CGColor, primaryColor: CGColor, secondaryColor: CGColor, detailColor: CGColor) {
+        let colorArtwork = CAColorArtwork(image: self, scale: size)
+        colorArtwork.analyze()
+        guard let backgroundColor = colorArtwork.backgroundColor,
+            let primaryColor = colorArtwork.primaryColor,
+            let secondaryColor = colorArtwork.secondaryColor,
+            let detailColor = colorArtwork.detailColor else {
+            return (.white, .black, .black, .black)
+        }
+        
+        return (backgroundColor, primaryColor, secondaryColor, detailColor)
+    }
+    
+}
+
+class CAColorArtwork {
     
     var image: CGImage
     
-    public var backgroundColor: CGColor?
-    public var primaryColor: CGColor?
-    public var secondaryColor: CGColor?
-    public var detailColor: CGColor?
+    var backgroundColor: CGColor?
+    var primaryColor: CGColor?
+    var secondaryColor: CGColor?
+    var detailColor: CGColor?
     
     static let defaultScaleSize = CGSize(width: 300, height: 300)
     
-    public init(image: CGImage, scale: CGSize = defaultScaleSize) {
-        guard scale != .zero else {
-            self.image = image
+    init(image: CGImage, scale: CGSize?) {
+        guard let scale = scale, scale != .zero else {
+            self.image = image.scaling(to: CAColorArtwork.defaultScaleSize) ?? image
             return
         }
         
@@ -36,7 +53,7 @@ public class CAColorArtwork {
         self.image = image.scaling(to: scale) ?? image
     }
     
-    public func analyze() {
+    func analyze() {
         guard let data = image.dataProvider?.data,
             let dataPtr = CFDataGetBytePtr(data) else {
                 return
@@ -48,22 +65,12 @@ public class CAColorArtwork {
         let colors = findColors(data: dataPtr, isDarkBackground: background.isDark)
         let textColors = findTextColor(in: colors, background: background)
         
-        let fallback:CGColor
-        if background.isDark {
-            fallback = CGColor(colorSpace: CGColorSpace(name: CGColorSpace.sRGB)!, components: [1, 1, 1, 1])!
-        } else {
-            fallback = CGColor(colorSpace: CGColorSpace(name: CGColorSpace.sRGB)!, components: [0, 0, 0, 1])!
-        }
+        let fallback: CGColor = background.isDark ? .white : .black
         
         backgroundColor = background.cgColor
         primaryColor = textColors.primary?.cgColor ?? fallback
         secondaryColor = textColors.secondary?.cgColor ?? fallback
         detailColor = textColors.detail?.cgColor ?? fallback
-    }
-    
-    public func analyze(completionHandler: () -> Void) {
-        analyze()
-        completionHandler()
     }
     
     func findEdgeColors(data: UnsafePointer<UInt8>) -> [CACountedRGBColor] {
@@ -216,6 +223,14 @@ extension CGImage {
         
         return context?.makeImage()
     }
+    
+}
+
+extension CGColor {
+    
+    static let white = CGColor(colorSpace: CGColorSpace(name: CGColorSpace.sRGB)!, components: [1, 1, 1, 1])!
+    
+    static let black = CGColor(colorSpace: CGColorSpace(name: CGColorSpace.sRGB)!, components: [0, 0, 0, 1])!
     
 }
 

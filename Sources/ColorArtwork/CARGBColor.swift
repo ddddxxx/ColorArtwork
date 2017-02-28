@@ -50,11 +50,7 @@ struct CARGBColor {
     }
     
     func isContrastable(with c:CARGBColor) -> Bool {
-        if luma > c.luma {
-            return luma-c.luma>0.3 && luma/c.luma>1.6
-        } else {
-            return c.luma-luma>0.3 && c.luma/luma>1.6
-        }
+        return max(luma, c.luma) / min(luma, c.luma) > 1.6
     }
     
     func isDistinct(with c:CARGBColor) -> Bool {
