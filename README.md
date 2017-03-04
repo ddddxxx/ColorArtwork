@@ -4,6 +4,7 @@
 ![supports](https://img.shields.io/badge/supports-Carthage%20%7C%20Swift_Package_Manager-brightgreen.svg)
 ![platforms](https://img.shields.io/badge/platforms-macOS%20%7C%20iOS%20%7C%20tvOS%20%7C%20watchOS-lightgrey.svg)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![codebeat badge](https://codebeat.co/badges/3a45abf9-c765-49a4-b060-bf774d1288b6)](https://codebeat.co/projects/github-com-xqs6lb3a-colorartwork-master)
 
 Swift-based iTunes 11-style color matching code. Inspired by [Panic Blog](https://panic.com/blog/itunes-11-and-colors/).
 
