@@ -45,7 +45,14 @@ import ColorArtwork
 ```
 
 ```swift
-let (backgroundColor, primaryColor, secondaryColor, detailColor) = IMAGE.getProminentColors()
+// IMAGE: UIImage / NSImage / CGImage
+//      UIImage -> UIColor
+//      NSImage -> NSColor
+//      CGImage -> CGColor
+// SIZE: scale down size before analyzing
+//      nil(default): auto scale
+//      zero: do not scale
+let (backgroundColor, primaryColor, secondaryColor, detailColor) = IMAGE.getProminentColors(scale: SIZE)
 ```
 
 ## License
