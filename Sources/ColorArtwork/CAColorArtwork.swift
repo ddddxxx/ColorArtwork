@@ -38,14 +38,19 @@ class CAColorArtwork {
     static let defaultScaleSize = CGSize(width: 300, height: 300)
     
     init(image: CGImage, scale: CGSize?) {
-        guard let scale = scale, scale != .zero else {
+        guard let scale = scale else {
             self.image = image.scaling(to: CAColorArtwork.defaultScaleSize) ?? image
             return
         }
         
         // never scale up
-        guard image.width > Int(scale.width),
-            image.height > Int(scale.height) else {
+        if image.width < Int(scale.width) || image.height < Int(scale.height) {
+            self.image = image
+            return
+        }
+        
+        // do not scale to zero / current size
+        if scale == .zero || scale == CGSize(width: image.width, height: image.height) {
             self.image = image
             return
         }
