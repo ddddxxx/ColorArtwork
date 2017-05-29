@@ -151,13 +151,13 @@ class CAColorArtwork {
     
     func findEdgeColor(in edgeColors: [CACountedRGBColor]) -> CARGBColor? {
         let threshold = edgeColors.count / 100
-        let colors = edgeColors.filter(){
+        let edgeColors = edgeColors.filter(){
             $0.count > threshold
         }.sorted() {
             $0.count > $1.count
         }
         
-        guard colors.count > 0 else {
+        guard edgeColors.count > 0 else {
             return nil
         }
         
