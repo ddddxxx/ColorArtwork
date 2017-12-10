@@ -6,6 +6,25 @@
 //
 //
 
+import CoreGraphics
+
+extension CGImage {
+    
+    public func getProminentColors(scale size: CGSize? = nil) -> (backgroundColor: CGColor, primaryColor: CGColor, secondaryColor: CGColor, detailColor: CGColor) {
+        let colorArtwork = ColorArtwork(image: self, scale: size)
+        colorArtwork.analyze()
+        guard let backgroundColor = colorArtwork.backgroundColor,
+            let primaryColor = colorArtwork.primaryColor,
+            let secondaryColor = colorArtwork.secondaryColor,
+            let detailColor = colorArtwork.detailColor else {
+                return (.white, .black, .black, .black)
+        }
+        
+        return (backgroundColor, primaryColor, secondaryColor, detailColor)
+    }
+    
+}
+
 #if os(macOS)
     
     import Cocoa

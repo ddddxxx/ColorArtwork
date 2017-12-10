@@ -1,5 +1,5 @@
 //
-//  CAColorArtwork.swift
+//  ColorArtwork.swift
 //  ColorArtwork
 //
 //  Created by 邓翔 on 2017/2/24.
@@ -9,24 +9,7 @@
 import Foundation
 import CoreGraphics
 
-extension CGImage {
-    
-    public func getProminentColors(scale size: CGSize? = nil) -> (backgroundColor: CGColor, primaryColor: CGColor, secondaryColor: CGColor, detailColor: CGColor) {
-        let colorArtwork = CAColorArtwork(image: self, scale: size)
-        colorArtwork.analyze()
-        guard let backgroundColor = colorArtwork.backgroundColor,
-            let primaryColor = colorArtwork.primaryColor,
-            let secondaryColor = colorArtwork.secondaryColor,
-            let detailColor = colorArtwork.detailColor else {
-            return (.white, .black, .black, .black)
-        }
-        
-        return (backgroundColor, primaryColor, secondaryColor, detailColor)
-    }
-    
-}
-
-class CAColorArtwork {
+class ColorArtwork {
     
     var image: CGImage
     
@@ -39,7 +22,7 @@ class CAColorArtwork {
     
     init(image: CGImage, scale: CGSize?) {
         guard let scale = scale else {
-            self.image = image.scaling(to: CAColorArtwork.defaultScaleSize) ?? image
+            self.image = image.scaling(to: ColorArtwork.defaultScaleSize) ?? image
             return
         }
         
@@ -65,7 +48,7 @@ class CAColorArtwork {
         }
         
         let edgeColors = findEdgeColors(data: dataPtr)
-        let background = findEdgeColor(in: edgeColors) ?? CARGBColor(r: 1, g: 1, b: 1)
+        let background = findEdgeColor(in: edgeColors) ?? RGBColor(r: 1, g: 1, b: 1)
         
         let colors = findColors(data: dataPtr, isDarkBackground: background.isDark)
         let textColors = findTextColor(in: colors, background: background)
@@ -78,7 +61,7 @@ class CAColorArtwork {
         detailColor = textColors.detail?.cgColor ?? fallback
     }
     
-    func findEdgeColors(data: UnsafePointer<UInt8>) -> [CACountedRGBColor] {
+    func findEdgeColors(data: UnsafePointer<UInt8>) -> [CountedRGBColor] {
         let width = image.width
         let height = image.height
         
@@ -91,31 +74,31 @@ class CAColorArtwork {
         
         for row in 0 ..< height {
             let leftEdgeIndex = row * bpr
-            let leftEdgeColor = CARGBColor(compnents: data + leftEdgeIndex)
+            let leftEdgeColor = RGBColor(compnents: data + leftEdgeIndex)
             edgeColorSet.add(leftEdgeColor)
             
             let rightEdgeIndex = row * bpr + (width-1) * bytesPerPixel
-            let rightEdgeColor = CARGBColor(compnents: data + rightEdgeIndex)
+            let rightEdgeColor = RGBColor(compnents: data + rightEdgeIndex)
             edgeColorSet.add(rightEdgeColor)
         }
         for col in 0 ..< width {
             let topEdgeIndex = col * bytesPerPixel
-            let topEdgeColor = CARGBColor(compnents: data + topEdgeIndex)
+            let topEdgeColor = RGBColor(compnents: data + topEdgeIndex)
             edgeColorSet.add(topEdgeColor)
             
             let bottomEdgeIndex = (height-1) * bpr + col * bytesPerPixel
-            let bottomEdgeColor = CARGBColor(compnents: data + bottomEdgeIndex)
+            let bottomEdgeColor = RGBColor(compnents: data + bottomEdgeIndex)
             edgeColorSet.add(bottomEdgeColor)
         }
         
         let edgeColors = edgeColorSet.objectEnumerator().allObjects.map() {
-            CACountedRGBColor(color: ($0 as! CARGBColor), count: edgeColorSet.count(for: $0))
+            CountedRGBColor(color: ($0 as! RGBColor), count: edgeColorSet.count(for: $0))
         }
         
         return edgeColors
     }
     
-    func findColors(data: UnsafePointer<UInt8>, isDarkBackground: Bool) -> [CACountedRGBColor] {
+    func findColors(data: UnsafePointer<UInt8>, isDarkBackground: Bool) -> [CountedRGBColor] {
         let width = image.width
         let height = image.height
         
@@ -129,18 +112,18 @@ class CAColorArtwork {
         for row in 0 ..< height {
             for col in 0 ..< width {
                 let index = row * bpr + col * bytesPerPixel
-                let color = CARGBColor(compnents: data + index)
+                let color = RGBColor(compnents: data + index)
                 if color.isDark != isDarkBackground {
                     colorSet.add(color)
                 }
             }
         }
         
-        let colors = colorSet.objectEnumerator().allObjects.flatMap() { color -> CACountedRGBColor? in
-            let color = color as! CARGBColor
+        let colors = colorSet.objectEnumerator().allObjects.flatMap() { color -> CountedRGBColor? in
+            let color = color as! RGBColor
             let count = colorSet.count(for: color)
             if count > 2 {
-                return CACountedRGBColor(color: color, count: count)
+                return CountedRGBColor(color: color, count: count)
             } else {
                 return nil
             }
@@ -149,7 +132,7 @@ class CAColorArtwork {
         return colors
     }
     
-    func findEdgeColor(in edgeColors: [CACountedRGBColor]) -> CARGBColor? {
+    func findEdgeColor(in edgeColors: [CountedRGBColor]) -> RGBColor? {
         let threshold = edgeColors.count / 100
         let edgeColors = edgeColors.filter(){
             $0.count > threshold
@@ -177,16 +160,16 @@ class CAColorArtwork {
         return proposed.color
     }
     
-    func findTextColor(in colors: [CACountedRGBColor], background: CARGBColor) -> (primary: CARGBColor?, secondary: CARGBColor?, detail: CARGBColor?) {
+    func findTextColor(in colors: [CountedRGBColor], background: RGBColor) -> (primary: RGBColor?, secondary: RGBColor?, detail: RGBColor?) {
         let colors = colors.filter(){
             $0.color.isContrastable(with: background)
         }.sorted() {
             $0.count > $1.count
         }
         
-        var primary: CARGBColor? = nil
-        var secondary: CARGBColor? = nil
-        var detail: CARGBColor? = nil
+        var primary: RGBColor? = nil
+        var secondary: RGBColor? = nil
+        var detail: RGBColor? = nil
         
         for countedColor in colors {
             let color = countedColor.color.withMinimumSaturation(0.15)
