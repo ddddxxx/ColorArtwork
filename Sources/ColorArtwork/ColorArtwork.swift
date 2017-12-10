@@ -30,10 +30,7 @@ class ColorArtwork {
     static let defaultScaleSize = CGSize(width: 300, height: 300)
     
     init(image: CGImage, scale: CGSize?) {
-        guard let scale = scale else {
-            self.image = image.scaling(to: ColorArtwork.defaultScaleSize) ?? image
-            return
-        }
+        let scale = scale ?? ColorArtwork.defaultScaleSize
         
         // never scale up
         if image.width < Int(scale.width) || image.height < Int(scale.height) {
