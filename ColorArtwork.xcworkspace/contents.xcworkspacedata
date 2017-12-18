@@ -2,9 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:ColorArtwork.playground">
+      location = "container:ColorArtwork.xcodeproj">
    </FileRef>
    <FileRef
-      location = "container:ColorArtwork.xcodeproj">
+      location = "group:ColorArtwork.playground">
    </FileRef>
 </Workspace>

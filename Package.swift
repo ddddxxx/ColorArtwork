@@ -1,16 +1,20 @@
-//
-//  Package.swift
-//  ColorArtwork
-//
-//  Created by 邓翔 on 2017/2/24.
-//
-//
+// swift-tools-version:4.0
+// The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
 let package = Package(
-    name: "ColorArt",
+    name: "ColorArtwork",
+    products: [
+        .library(
+            name: "ColorArtwork",
+            targets: ["ColorArtwork"]),
+        ],
     targets: [
-        Target(name: "ColorArtworkTests", dependencies: ["ColorArtwork"])
+        .target(
+            name: "ColorArtwork"),
+        .testTarget(
+            name: "ColorArtworkTests",
+            dependencies: ["ColorArtwork"])
     ]
 )

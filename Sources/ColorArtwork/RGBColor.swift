@@ -1,15 +1,24 @@
 //
-//  CARGBColor.swift
-//  ColorArtwork
+//  RGBColor.swift
 //
-//  Created by 邓翔 on 2017/2/24.
+//  This file is part of ColorArtwork. <https://github.com/ddddxxx/ColorArtwork>
+//  Copyright (c) 2017 Xander Deng
 //
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in
+//  all copies or substantial portions of the Software.
 //
 
 import Foundation
 import CoreGraphics
 
-struct CARGBColor {
+struct RGBColor {
     
     let r: CGFloat
     let g: CGFloat
@@ -20,6 +29,9 @@ struct CARGBColor {
         self.g = g
         self.b = b
     }
+}
+
+extension RGBColor {
     
     init(compnents: UnsafePointer<UInt8>) {
         self.r = CGFloat(compnents[0]) / 255
@@ -49,11 +61,11 @@ struct CARGBColor {
         return CGColor(colorSpace: CGColorSpace(name: CGColorSpace.sRGB)!, components: [r, g, b, 1.0])!
     }
     
-    func isContrastable(with c:CARGBColor) -> Bool {
+    func isContrastable(with c:RGBColor) -> Bool {
         return max(luma, c.luma) / min(luma, c.luma) > 1.6
     }
     
-    func isDistinct(with c:CARGBColor) -> Bool {
+    func isDistinct(with c:RGBColor) -> Bool {
         let threshold: CGFloat = 0.25
         if abs(r-c.r) > threshold || abs(g-c.g) > threshold || abs(b-c.b) > threshold,
             (abs(r-g) > 0.1 && abs(r-b) > 0.1) || (abs(c.r-c.g) > 0.1 && abs(c.r-c.b) > 0.1) {
@@ -64,7 +76,7 @@ struct CARGBColor {
     
 }
 
-extension CARGBColor {
+extension RGBColor {
     
     var h: CGFloat {
         let maxComponent = max(r, g, b)
@@ -147,33 +159,30 @@ extension CARGBColor {
         }
     }
     
-    func withMinimumSaturation(_ saturation: CGFloat) -> CARGBColor {
+    func withMinimumSaturation(_ saturation: CGFloat) -> RGBColor {
         if s < saturation {
-            return CARGBColor(h: h, s: saturation, v: v)
+            return RGBColor(h: h, s: saturation, v: v)
         } else {
             return self
         }
     }
 }
 
-extension CARGBColor: Hashable {
+extension RGBColor: Hashable {
     
     var hashValue: Int {
         return r.hashValue &+ g.hashValue &+ b.hashValue
     }
     
-    public static func ==(lhs: CARGBColor, rhs: CARGBColor) -> Bool {
+    public static func ==(lhs: RGBColor, rhs: RGBColor) -> Bool {
         return lhs.hashValue == rhs.hashValue
     }
-    
 }
 
 
-struct CACountedRGBColor {
+struct CountedRGBColor {
     
-    let color: CARGBColor
-    
+    let color: RGBColor
     let count: Int
-    
 }
 
